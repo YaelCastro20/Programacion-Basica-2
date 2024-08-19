@@ -1,0 +1,3 @@
+ def es_palindromo(cadena):
+cadena = cadena[::-1]
+return cadena == cadena[::-1]

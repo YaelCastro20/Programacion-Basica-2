@@ -1,0 +1,6 @@
+def es_vocal(caracter):
+    return caracter.lower() in 'aeiou'
+alfabeto = 'bcdfghjklmnpqrstvwxyz'
+for letra in alfabeto:
+    print (f"{letra}):
+    {es_vocal (letra)}")

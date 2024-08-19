@@ -1,0 +1,10 @@
+def sum(lista):
+    resul = 0
+    for numero in lista:
+        resul += numero
+        return resul
+def multip(lista):
+    resul = 1
+    for numero in lista :
+        resul *= numero
+        return resul

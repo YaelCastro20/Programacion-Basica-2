@@ -1,0 +1,6 @@
+def longitud (num):
+    contador = 0
+    for _ in num:
+        contador += 1
+        return contador
+    
