@@ -1,0 +1,54 @@
+from datetime import date
+from typing import List, Dict, Set, Tuple
+
+class Tarea:
+ 
+    def _init_(self, titulo: str, descripcion: str, etiquetas: Set[str]):
+        self.titulo = titulo
+        self.descripcion = descripcion
+        self.etiquetas = etiquetas
+
+    def mostrar_info(self):
+        return f"Tarea: {self.titulo}\nDescripción: {self.descripcion}\nEtiquetas: {', '.join(self.etiquetas)}"
+
+class TareaConFechaLimite(Tarea):
+    
+    def _init_(self, titulo: str, descripcion: str, etiquetas: Set[str], fecha_limite: Tuple[int, int, int]):
+        super()._init_(titulo, descripcion, etiquetas)
+        self.fecha_limite = date(*fecha_limite)
+    
+    def mostrar_info(self):
+        base_info = super().mostrar_info()
+        return f"{base_info}\nFecha Límite: {self.fecha_limite}"
+
+categorias: Dict[str, List[Tarea]] = {}
+
+def agregar_tarea(categoria: str, tarea: Tarea):
+
+    if categoria not in categorias:
+        categorias[categoria] = []
+    categorias[categoria].append(tarea)
+    print(f"Tarea '{tarea.titulo}' añadida a la categoría '{categoria}'.")
+
+def eliminar_tarea(categoria: str, titulo: str):
+
+    if categoria in categorias:
+        tareas = categorias[categoria]
+        categorias[categoria] = [tarea for tarea in tareas if tarea.titulo != titulo]
+        print(f"Tarea '{titulo}' eliminada de la categoría '{categoria}'.")
+
+def modificar_tarea(categoria: str, titulo: str, nuevo_titulo: str, nueva_descripcion: str, nuevas_etiquetas: Set[str]):
+
+    if categoria in categorias:
+        for tarea in categorias[categoria]:
+            if tarea.titulo == titulo:
+                tarea.titulo = nuevo_titulo
+                tarea.descripcion = nueva_descripcion
+                tarea.etiquetas = nuevas_etiquetas
+                print(f"Tarea '{titulo}' modificada con éxito.")
+
+def mostrar_tareas(categoria: str):
+
+    if categoria in categorias:
+        for tarea in categorias[categoria]:
+            print(tarea.mostrar_info())
